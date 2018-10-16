@@ -3,10 +3,10 @@ package com.xrc.kotlinproject.view
 import com.xrc.kotlinproject.base.IBaseView
 
 /**
- * MainView
+ * IMainView
  * Created by xrc on 18/10/15.
  */
-interface MainView : IBaseView {
+interface IMainView : IBaseView {
 
     fun loginSuccess()
 
