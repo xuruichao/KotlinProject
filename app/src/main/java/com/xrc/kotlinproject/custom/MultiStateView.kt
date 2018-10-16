@@ -35,13 +35,13 @@ class MultiStateView(context: Context, attrs: AttributeSet) : FrameLayout(contex
 
     fun empty() {
         showTextHideLoading()
-        setStateText("空空如也！")
+        setStateText("空空如也，点击重试")
         tv_state.isEnabled = true
     }
 
     fun error() {
         showTextHideLoading()
-        setStateText("网络加载失败了！")
+        setStateText("网络加载失败了，点击重试")
         tv_state.isEnabled = true
     }
 
