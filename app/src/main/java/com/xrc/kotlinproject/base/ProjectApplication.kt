@@ -7,7 +7,7 @@ import android.app.Application
  * ProjectApplication
  * Created by xrc on 18/10/16.
  */
-class ProjectApplication : Application() {
+open class ProjectApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

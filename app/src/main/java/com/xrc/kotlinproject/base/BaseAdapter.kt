@@ -4,9 +4,9 @@ import android.support.v7.widget.RecyclerView.Adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
-abstract class BaseAdapter<T> : Adapter<BaseHolder>() {
+abstract class BaseAdapter<in T> : Adapter<BaseHolder>() {
 
-    private var mList: Array<T>? = null
+    private var mList: List<T>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder {
         return BaseHolder(LayoutInflater.from(ProjectApplication.instance()).inflate(getLayoutId(), parent, false))
@@ -29,7 +29,7 @@ abstract class BaseAdapter<T> : Adapter<BaseHolder>() {
     abstract fun onBind(holder: BaseHolder, bean: T?, position: Int)
 
 
-    fun updateData(list : Array<T>) {
+    fun updateData(list : List<T>) {
         mList = list
     }
 }

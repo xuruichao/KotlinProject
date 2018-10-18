@@ -13,7 +13,7 @@ class ListPresenter(view: IListView) : BasePresenter<IListView>(view) {
         Handler().postDelayed({
             val random: Int = (Math.random() * 10).toInt()
             when (random) {
-                in 0..13 -> {
+                in 0..3 -> {
                     mvpView?.success()
                 }
                 in 3..6 -> {

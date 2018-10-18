@@ -18,6 +18,9 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView, View.OnClickListe
             R.id.btn2 -> {
                 startActivity(Intent(this, ListActivity::class.java))
             }
+            R.id.btn3 -> {
+                startActivity(Intent(this, DialogActivity::class.java))
+            }
         }
     }
 
@@ -32,6 +35,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView, View.OnClickListe
     override fun init() {
         btn1.setOnClickListener(this)
         btn2.setOnClickListener(this)
+        btn3.setOnClickListener(this)
     }
 
     override fun loginSuccess() {

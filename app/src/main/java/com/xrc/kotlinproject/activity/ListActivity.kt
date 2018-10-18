@@ -21,21 +21,17 @@ class ListActivity : BaseActivity<ListPresenter>(), IListView {
         multi_state_view.normal()
         val adapter = ListAdapter()
         val data = getData()
-        recycler_view.adapter = ListAdapter()
+        recycler_view.adapter = adapter
         adapter.updateData(data)
     }
 
-    private fun getData(): Array<ListBean> {
-        var i = 10
-        val bean = ListBean()
-        bean.content = "1"
-        val array: Array<ListBean> = arrayOf(bean)
-//        do {
-//            i--
-//            val bean = ListBean()
-//            bean.content = "第 $i 项"
-//            array.plus(bean)
-//        } while (i >= 0)
+    private fun getData(): List<ListBean> {
+        val array: List<ListBean> = mutableListOf()
+        for (i in 1..10) {
+            val bean = ListBean()
+            bean.content = "第$i"
+            (array as MutableList).add(bean)
+        }
         return array
     }
 

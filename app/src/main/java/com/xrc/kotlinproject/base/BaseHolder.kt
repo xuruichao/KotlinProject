@@ -5,7 +5,7 @@ import android.view.View
 
 class BaseHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    fun getView(id: Int): View {
+    fun <T : View> getView(id: Int): T {
         return itemView.findViewById(id)
     }
 }
