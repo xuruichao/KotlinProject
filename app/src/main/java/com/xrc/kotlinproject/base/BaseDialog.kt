@@ -10,13 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
+
 /**
  * BaseDialog
  * Created by xrc on 18/10/17.
  */
 abstract class BaseDialog : DialogFragment() {
 
-    lateinit var mDialog: Dialog
+    protected lateinit var mDialog: Dialog
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return layoutInflater.inflate(getLayoutId(), container, false)
@@ -30,7 +31,9 @@ abstract class BaseDialog : DialogFragment() {
         dialogWindow!!.setBackgroundDrawableResource(android.R.color.transparent)
         val dm = DisplayMetrics()
         activity!!.windowManager.defaultDisplay.getMetrics(dm)
-        dialogWindow.setLayout(dm.widthPixels, ViewGroup.LayoutParams.WRAP_CONTENT)
+        if (!useDirectValue()) {
+            dialogWindow.setLayout((dm.widthPixels * getScreenWidthProportion()).toInt(), ViewGroup.LayoutParams.WRAP_CONTENT)
+        }
         //设置竖直方向偏移量
         val attributes = dialogWindow.attributes
         attributes.gravity = getGravity()
@@ -49,7 +52,7 @@ abstract class BaseDialog : DialogFragment() {
      *
      * @return 返回负值是向上偏移 正值是向下偏移 单位dp 例如：想向上偏移20dp，return -20 即可，无需转换
      */
-    protected fun getVerticalMovement(): Float {
+    protected open fun getVerticalMovement(): Float {
         return 0f
     }
 
@@ -58,8 +61,24 @@ abstract class BaseDialog : DialogFragment() {
      *
      * @return 返回负值是向左偏移 正值是向右偏移 单位dp 例如：想向左偏移20dp，return -20 即可，无需转换
      */
-    protected fun getHorizontalMovement(): Float {
+    protected open fun getHorizontalMovement(): Float {
         return 0f
+    }
+
+    /**
+     * 屏幕占比
+     *
+     * @return 占屏幕宽度的多少
+     */
+    protected open fun getScreenWidthProportion(): Float {
+        return 0.9f
+    }
+
+    /**
+     * 是否使用绝对宽高进行布局
+     */
+    protected open fun useDirectValue(): Boolean {
+        return false
     }
 
     abstract fun init(bundle: Bundle?)
