@@ -16,9 +16,9 @@ open class ProjectApplication : Application() {
 
     companion object {
         @SuppressLint("StaticFieldLeak")
-        private var INSTANCE: Application? = null
+        lateinit var INSTANCE: Application
 
-        fun instance(): Application? {
+        fun instance(): Application {
             return INSTANCE
         }
     }

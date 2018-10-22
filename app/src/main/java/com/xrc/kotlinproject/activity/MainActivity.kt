@@ -21,6 +21,9 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView, View.OnClickListe
             R.id.btn3 -> {
                 startActivity(Intent(this, DialogActivity::class.java))
             }
+            R.id.btn4 -> {
+                startActivity(Intent(this, DataSaveActivity::class.java))
+            }
         }
     }
 
@@ -36,6 +39,7 @@ class MainActivity : BaseActivity<MainPresenter>(), IMainView, View.OnClickListe
         btn1.setOnClickListener(this)
         btn2.setOnClickListener(this)
         btn3.setOnClickListener(this)
+        btn4.setOnClickListener(this)
     }
 
     override fun loginSuccess() {
