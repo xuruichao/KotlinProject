@@ -2,14 +2,13 @@ package com.xrc.kotlinproject.presenter
 
 import android.os.Handler
 import com.xrc.kotlinproject.base.BasePresenter
-import com.xrc.kotlinproject.view.IListView
 
 /**
  * ListPresenter
  * Created by xrc on 18/10/15.
  */
-class ListPresenter(view: IListView) : BasePresenter<IListView>(view) {
-    fun requestInfo() {
+class ListPresenter(view: ListContract.View) : BasePresenter<ListContract.View>(view), ListContract.Presenter {
+    override fun requestInfo() {
         Handler().postDelayed({
             val random: Int = (Math.random() * 10).toInt()
             when (random) {

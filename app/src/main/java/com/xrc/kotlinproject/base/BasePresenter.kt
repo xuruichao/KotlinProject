@@ -1,44 +1,38 @@
 package com.xrc.kotlinproject.base
 
-import android.view.View
-import android.view.ViewGroup
-import com.xrc.kotlinproject.custom.MultiStateView
+import android.arch.lifecycle.Lifecycle
+import android.arch.lifecycle.LifecycleObserver
+import android.arch.lifecycle.LifecycleOwner
+import android.arch.lifecycle.OnLifecycleEvent
+import com.xrc.kotlinproject.util.ToastUtil
+import java.lang.ref.SoftReference
 
 /**
  * BasePresenter
  * Created by xrc on 18/10/15.
  */
-abstract class BasePresenter<V : IBaseView>(view: V) {
-    var mvpView: V? = null
+abstract class BasePresenter<V : IBaseView>(view: V) : IBasePresenter, LifecycleObserver {
+
+    private var mvpViewHolder: SoftReference<V>? = SoftReference(view)
+    var mvpView: V? = mvpViewHolder?.get()
 
     init {
-        mvpView = view
-    }
-
-    fun detach() {
-        mvpView = null
-    }
-
-    fun findMultiStateView(view: View?): ViewGroup? {
-        if (view is ViewGroup) {
-            if (view is MultiStateView) {
-                return view
-            }
-            for (i in 0 until view.childCount) {
-                val child = view.getChildAt(i)
-                if (child is ViewGroup) {
-                    if (child is MultiStateView) {
-                        return child
-                    } else {
-                        val multiStateView = findMultiStateView(child)
-                        if (multiStateView != null) {
-                            return multiStateView
-                        }
-                    }
-                }
-
-            }
+        if (mvpView is LifecycleOwner) {
+            @Suppress("LeakingThis")
+            (mvpView as LifecycleOwner).lifecycle.addObserver(this)
+            ToastUtil.showToast("attachView")
         }
-        return null
+    }
+
+    override fun detachView() {
+        mvpViewHolder?.clear()
+        mvpViewHolder = null
+        mvpView = null
+        ToastUtil.showToast("detachView")
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    fun onDestroy() {
+        detachView()
     }
 }

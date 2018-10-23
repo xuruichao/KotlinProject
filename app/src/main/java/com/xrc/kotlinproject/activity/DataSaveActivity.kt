@@ -3,7 +3,6 @@ package com.xrc.kotlinproject.activity
 import android.view.View
 import com.xrc.kotlinproject.R
 import com.xrc.kotlinproject.base.BaseActivity
-import com.xrc.kotlinproject.presenter.EmptyPresenter
 import com.xrc.kotlinproject.util.Preference
 import com.xrc.kotlinproject.util.ToastUtil
 import com.xrc.kotlinproject.view.IEmptyView
@@ -13,7 +12,7 @@ import kotlinx.android.synthetic.main.activity_data_save.*
  * DataSaveActivity
  * Created by xrc on 18/10/22.
  */
-class DataSaveActivity : BaseActivity<EmptyPresenter>(), IEmptyView, View.OnClickListener {
+class DataSaveActivity : BaseActivity(), IEmptyView, View.OnClickListener {
 
     private var data: String? by Preference("data", "123")
 
@@ -29,10 +28,6 @@ class DataSaveActivity : BaseActivity<EmptyPresenter>(), IEmptyView, View.OnClic
 
     override fun getLayoutId(): Int {
         return R.layout.activity_data_save
-    }
-
-    override fun initPresenter(): EmptyPresenter {
-        return EmptyPresenter(this)
     }
 
     override fun init() {

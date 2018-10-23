@@ -2,16 +2,16 @@ package com.xrc.kotlinproject.presenter
 
 import android.os.Handler
 import com.xrc.kotlinproject.base.BasePresenter
+import com.xrc.kotlinproject.base.ProjectApplication
 import com.xrc.kotlinproject.util.ToastUtil
-import com.xrc.kotlinproject.view.IMainView
 
 /**
  * MainPresenter
  * Created by xrc on 18/10/15.
  */
-class MainPresenter(view: IMainView) : BasePresenter<IMainView>(view) {
+class MainPresenter(view: MainContract.View) : BasePresenter<MainContract.View>(view), MainContract.Presenter {
 
-    fun login(username: String, password: String) {
+    override fun login(username: String, password: String) {
         mvpView?.showDialog()
         Handler().postDelayed({
             if (username == "123" && password == "456") {

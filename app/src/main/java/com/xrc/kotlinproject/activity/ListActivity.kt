@@ -4,15 +4,18 @@ import com.xrc.kotlinproject.R
 import com.xrc.kotlinproject.adapter.ListAdapter
 import com.xrc.kotlinproject.base.BaseActivity
 import com.xrc.kotlinproject.bean.ListBean
+import com.xrc.kotlinproject.presenter.ListContract
 import com.xrc.kotlinproject.presenter.ListPresenter
-import com.xrc.kotlinproject.view.IListView
 import kotlinx.android.synthetic.main.activity_list.*
 
 /**
  * ListActivity
  * Created by xrc on 18/10/16.
  */
-class ListActivity : BaseActivity<ListPresenter>(), IListView {
+class ListActivity : BaseActivity(), ListContract.View {
+
+    private val mPresenter: ListPresenter by lazy { ListPresenter(this) }
+
     override fun empty() {
         multi_state_view.empty()
     }
@@ -43,15 +46,11 @@ class ListActivity : BaseActivity<ListPresenter>(), IListView {
         return R.layout.activity_list
     }
 
-    override fun initPresenter(): ListPresenter {
-        return ListPresenter(this)
-    }
-
     override fun init() {
-        mPresenter?.requestInfo()
+        mPresenter.requestInfo()
     }
 
     override fun onRetry() {
-        mPresenter?.requestInfo()
+        mPresenter.requestInfo()
     }
 }
