@@ -3,8 +3,8 @@ package com.xrc.kotlinproject.activity
 import android.view.View
 import com.xrc.kotlinproject.R
 import com.xrc.kotlinproject.base.BaseActivity
+import com.xrc.kotlinproject.ext.toast
 import com.xrc.kotlinproject.util.Preference
-import com.xrc.kotlinproject.util.ToastUtil
 import com.xrc.kotlinproject.view.IEmptyView
 import kotlinx.android.synthetic.main.activity_data_save.*
 
@@ -20,7 +20,7 @@ class DataSaveActivity : BaseActivity(), IEmptyView, View.OnClickListener {
         val id = v?.id
         when (id) {
             R.id.save -> {
-                ToastUtil.showToast(data!!)
+                toast(data!!)
                 data = "456"
             }
         }

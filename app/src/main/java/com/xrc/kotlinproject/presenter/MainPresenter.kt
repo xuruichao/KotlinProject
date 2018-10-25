@@ -3,6 +3,7 @@ package com.xrc.kotlinproject.presenter
 import android.os.Handler
 import com.xrc.kotlinproject.base.BasePresenter
 import com.xrc.kotlinproject.base.ProjectApplication
+import com.xrc.kotlinproject.ext.toast
 import com.xrc.kotlinproject.util.ToastUtil
 
 /**
@@ -18,7 +19,7 @@ class MainPresenter(view: MainContract.View) : BasePresenter<MainContract.View>(
                 mvpView?.loginSuccess()
                 mvpView?.loginError()
             } else {
-                ToastUtil.showToast("账号密码错误")
+                toast("账号密码错误")
             }
             mvpView?.dismissDialog()
         }, 2000)

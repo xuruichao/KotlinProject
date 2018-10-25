@@ -4,7 +4,7 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleObserver
 import android.arch.lifecycle.LifecycleOwner
 import android.arch.lifecycle.OnLifecycleEvent
-import com.xrc.kotlinproject.util.ToastUtil
+import com.xrc.kotlinproject.ext.toast
 import java.lang.ref.SoftReference
 
 /**
@@ -20,7 +20,7 @@ abstract class BasePresenter<V : IBaseView>(view: V) : IBasePresenter, Lifecycle
         if (mvpView is LifecycleOwner) {
             @Suppress("LeakingThis")
             (mvpView as LifecycleOwner).lifecycle.addObserver(this)
-            ToastUtil.showToast("attachView")
+            toast("attachView")
         }
     }
 
@@ -28,7 +28,7 @@ abstract class BasePresenter<V : IBaseView>(view: V) : IBasePresenter, Lifecycle
         mvpViewHolder?.clear()
         mvpViewHolder = null
         mvpView = null
-        ToastUtil.showToast("detachView")
+        toast("detachView")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
