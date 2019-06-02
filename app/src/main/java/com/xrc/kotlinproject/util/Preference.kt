@@ -1,6 +1,5 @@
 package com.xrc.kotlinproject.util
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import com.xrc.kotlinproject.base.ProjectApplication
@@ -31,16 +30,15 @@ class Preference<T>(val name: String, private val defaultValue: T) {
 
     }
 
-    @SuppressLint("CommitPrefEdits")
-    private fun setSpValue(name: String, value: T) = with(sp.edit(), {
+    private fun setSpValue(name: String, value: T) = with(sp.edit()) {
         when (value) {
             is String -> putString(name, value)
             is Boolean -> putBoolean(name, value)
             else -> putString(name, serialize(value))
         }
-    })?.apply()
+    }?.apply()
 
-    private fun getSpValue(): T = with(sp, {
+    private fun getSpValue(): T = with(sp) {
         val res: Any = when (defaultValue) {
             is String -> getString(name, defaultValue)
             is Boolean -> getBoolean(name, defaultValue)
@@ -50,7 +48,7 @@ class Preference<T>(val name: String, private val defaultValue: T) {
         }
         @Suppress("UNCHECKED_CAST")
         return res as T
-    })
+    }
 
     @Throws(IOException::class)
     private fun <A> serialize(obj: A): String {

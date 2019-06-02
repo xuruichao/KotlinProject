@@ -17,12 +17,12 @@ abstract class BaseAdapter<T> : Adapter<BaseHolder>() {
     }
 
     override fun onBindViewHolder(holder: BaseHolder, position: Int) {
-        onBind(holder, mList?.get(position), position)
+        onBind(holder, mList[position], position)
     }
 
     abstract fun getLayoutId(): Int
 
-    abstract fun onBind(holder: BaseHolder, bean: T?, position: Int)
+    abstract fun onBind(holder: BaseHolder, bean: T, position: Int)
 
 
     fun updateData(list: List<T>) {

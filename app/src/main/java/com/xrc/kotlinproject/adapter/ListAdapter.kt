@@ -12,9 +12,11 @@ class ListAdapter : BaseAdapter<ListBean>() {
         return R.layout.item_list
     }
 
-    override fun onBind(holder: BaseHolder, bean: ListBean?, position: Int) {
-        val tvContent: TextView = holder.getView(R.id.tv_content)
-        tvContent.text = bean?.content
+    override fun onBind(holder: BaseHolder, bean: ListBean, position: Int) {
+        with(bean) {
+            val tvContent: TextView = holder.getView(R.id.tv_content)
+            tvContent.text = content
+        }
     }
 
 }

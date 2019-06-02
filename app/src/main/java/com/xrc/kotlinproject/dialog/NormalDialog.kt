@@ -19,7 +19,7 @@ class NormalDialog : BaseDialog() {
     }
 
     companion object {
-        private val CONTENT: String = "content"
+        private const val CONTENT: String = "content"
         fun newInstance(text: String = "此处显示内容"): NormalDialog {
             val dialog = NormalDialog()
             val bundle = Bundle()
